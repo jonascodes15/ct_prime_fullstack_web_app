@@ -1,0 +1,217 @@
+.deposit-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.deposit-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  animation: fadeInUp 0.4s ease both;
+}
+.deposit-section:nth-child(2) { animation-delay: 0.1s; }
+
+.deposit-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.wallet-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+.wallet-card:hover { border-color: var(--border-active); }
+.wallet-card.active {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue-glow);
+}
+
+.wc-symbol {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--accent-blue);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.wc-info { display: flex; flex-direction: column; }
+.wc-name { font-size: 0.85rem; font-weight: 500; }
+.wc-network { font-size: 0.72rem; color: var(--text-muted); }
+
+.wc-check {
+  margin-left: auto;
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+/* Fiat placeholder */
+.fiat-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.02);
+}
+
+.fiat-icon { font-size: 1.6rem; }
+.fiat-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 2px; }
+.fiat-sub   { font-size: 0.78rem; color: var(--text-muted); }
+
+.badge-coming {
+  margin-left: auto;
+  padding: 4px 12px;
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent-gold);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Address card */
+.address-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.address-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.network-badge {
+  padding: 2px 8px;
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--accent-cyan);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.address-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+.address-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  flex: 1;
+  word-break: break-all;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.copy-btn:hover { background: var(--accent-blue-light); }
+.copy-btn.copied { background: var(--accent-green); }
+
+.address-qr {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+.address-qr img { width: 120px; height: 120px; border-radius: 8px; }
+
+.address-warning {
+  font-size: 0.8rem;
+  color: rgba(255, 215, 0, 0.8);
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 6px;
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+
+/* Deposit form */
+.deposit-form { display: flex; flex-direction: column; gap: 16px; }
+.deposit-form h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.deposit-submit {
+  width: 100%;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.deposit-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.dash-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 230, 118, 0.1);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  color: var(--accent-green);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 960px) {
+  .deposit-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .wallet-grid { grid-template-columns: 1fr; }
+}

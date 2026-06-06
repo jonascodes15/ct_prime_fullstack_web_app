@@ -1,0 +1,8 @@
+.price-ticker {
+  background: var(--navy-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  overflow: hidden;
+}
+.price-ticker .tradingview-widget-container { width: 100%; }

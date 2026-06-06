@@ -1,0 +1,142 @@
+/* Page hero — shared for inner pages */
+.page-hero {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 98px;
+  background: linear-gradient(135deg, #060d1c 0%, #0d1f3c 60%, #0a1628 100%);
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.35;
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--navy-mid) 0%, transparent 60%);
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 32px;
+  max-width: 760px;
+  padding-left: 8vw;
+}
+.page-hero-inner h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.18;
+  margin: 12px 0 16px;
+}
+.page-hero-inner p {
+  color: var(--grey);
+  font-size: 1rem;
+  line-height: 1.72;
+  max-width: 600px;
+}
+
+/* Pillars */
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pillar-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: var(--transition);
+}
+.pillar-card:hover { border-color: var(--border-blue); transform: translateY(-3px); }
+.pillar-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.pillar-card h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.pillar-card p  { color: var(--grey); font-size: 0.875rem; line-height: 1.65; }
+
+/* Company two-col */
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.about-offices h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--grey);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.offices-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.office-tag {
+  padding: 5px 13px;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+
+/* Values */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.value-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: var(--transition);
+}
+.value-card:hover { border-color: var(--border-blue); }
+.vc-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.value-card h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.value-card p  { color: var(--grey); font-size: 0.875rem; line-height: 1.65; }
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.contact-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: var(--transition);
+  display: block;
+}
+.contact-card:hover { border-color: var(--border-blue); transform: translateY(-3px); }
+.cc-icon  { font-size: 2rem; margin-bottom: 12px; }
+.cc-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-dark); margin-bottom: 6px; }
+.cc-val   { font-size: 0.9rem; font-weight: 600; color: var(--off-white); }
+
+@media (max-width: 900px) {
+  .about-pillars  { grid-template-columns: 1fr; }
+  .about-two-col  { grid-template-columns: 1fr; gap: 32px; }
+  .values-grid    { grid-template-columns: 1fr; }
+  .contact-grid   { grid-template-columns: 1fr; max-width: 400px; }
+}
+@media (max-width: 640px) {
+  .about-pillars { grid-template-columns: 1fr; }
+}
+
+/* Re-export page-hero for reuse in Markets (both import this via their own CSS, page-hero defined in About.css) */

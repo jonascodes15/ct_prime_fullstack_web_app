@@ -1,0 +1,132 @@
+.dash-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.dash-header h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 4px; }
+.dash-header p   { color: var(--grey); font-size: 0.875rem; }
+.dash-header-actions { display: flex; gap: 10px; }
+
+.dash-loading { display: flex; justify-content: center; padding: 80px 0; }
+
+.balance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.balance-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  transition: var(--transition);
+  animation: fadeInUp 0.4s ease both;
+}
+.balance-card:nth-child(2) { animation-delay: 0.05s; }
+.balance-card:nth-child(3) { animation-delay: 0.1s; }
+.balance-card:nth-child(4) { animation-delay: 0.15s; }
+.balance-card:hover { border-color: var(--border-blue); }
+
+.main-balance {
+  background: linear-gradient(135deg, var(--navy-card), rgba(21,101,255,0.08));
+  border-color: var(--border-blue);
+}
+
+.bc-label {
+  font-size: 0.72rem;
+  color: var(--grey-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.bc-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.bc-value.green { color: var(--green); }
+.bc-value.trader-name { font-size: 1.15rem; }
+
+.bc-sub { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--grey); }
+.bc-action { font-size: 0.8rem; color: var(--blue); margin-top: 6px; display: inline-block; }
+
+.dash-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dash-section {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  animation: fadeInUp 0.5s 0.2s ease both;
+  opacity: 0;
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--off-white);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-empty { color: var(--grey-dark); font-size: 0.875rem; text-align: center; padding: 40px 0; }
+
+.earnings-list { display: flex; flex-direction: column; gap: 10px; }
+.earning-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 14px;
+  background: var(--navy-mid);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.er-left { display: flex; align-items: center; gap: 10px; }
+.er-type {
+  padding: 3px 8px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.er-type.daily  { background: var(--blue-glow); color: var(--blue); }
+.er-type.weekly { background: rgba(0,207,255,0.1); color: var(--cyan); }
+.er-note  { font-size: 0.835rem; color: var(--grey); }
+.er-right { text-align: right; }
+.er-amount { font-size: 0.92rem; font-weight: 600; display: block; }
+.er-amount.green { color: var(--green); }
+.er-date { font-size: 0.72rem; color: var(--grey-dark); }
+
+.trades-list { display: flex; flex-direction: column; gap: 10px; }
+.trade-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 14px;
+  background: var(--navy-mid);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.tr-left { display: flex; align-items: center; gap: 12px; }
+.tr-right { text-align: right; }
+.trade-dir {
+  padding: 4px 9px; border-radius: 5px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+}
+.trade-dir.buy  { background: rgba(0,230,118,0.12); color: var(--green); }
+.trade-dir.sell { background: rgba(255,61,87,0.12);  color: var(--red);   }
+.tr-asset { font-size: 0.875rem; font-weight: 600; margin-bottom: 2px; }
+.tr-entry { font-size: 0.75rem; color: var(--grey-dark); }
+.tr-pnl   { font-size: 0.92rem; font-weight: 600; display: block; }
+.tr-pnl.green { color: var(--green); }
+.tr-pnl.red   { color: var(--red); }
+.tr-qty { font-size: 0.72rem; color: var(--grey-dark); }
+
+@media (max-width: 1200px) { .balance-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 960px)  { .dash-grid-2  { grid-template-columns: 1fr; } }
+@media (max-width: 480px)  { .balance-grid { grid-template-columns: 1fr; } }
