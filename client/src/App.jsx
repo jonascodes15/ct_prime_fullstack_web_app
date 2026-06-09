@@ -1,23 +1,24 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
-import Home             from './pages/Home';
-import About            from './pages/About';
-import Markets          from './pages/Markets';
-import Login            from './pages/Login';
-import Register         from './pages/Register';
-import Dashboard        from './pages/Dashboard';
-import Deposit          from './pages/Deposit';
-import Withdrawal       from './pages/Withdrawal';
-import TraderActivation from './pages/TraderActivation';
-import NotFound         from './pages/NotFound';
+import Home               from './pages/Home';
+import About              from './pages/About';
+import Markets            from './pages/Markets';
+import Login              from './pages/Login';
+import Register           from './pages/Register';
+import VerificationPage   from './pages/VerificationPage';
+import Dashboard          from './pages/Dashboard';
+import Deposit            from './pages/Deposit';
+import Withdrawal         from './pages/Withdrawal';
+import TraderActivation   from './pages/TraderActivation';
+import NotFound           from './pages/NotFound';
 
-import AdminOverview    from './pages/admin/AdminOverview';
-import AdminMembers     from './pages/admin/AdminMembers';
-import AdminDeposits    from './pages/admin/AdminDeposits';
-import AdminWithdrawals from './pages/admin/AdminWithdrawals';
-import AdminTraders     from './pages/admin/AdminTraders';
-import AdminWallets     from './pages/admin/AdminWallets';
+import AdminOverview      from './pages/admin/AdminOverview';
+import AdminMembers       from './pages/admin/AdminMembers';
+import AdminDeposits      from './pages/admin/AdminDeposits';
+import AdminWithdrawals   from './pages/admin/AdminWithdrawals';
+import AdminTraders       from './pages/admin/AdminTraders';
+import AdminWallets       from './pages/admin/AdminWallets';
 
 import './index.css';
 
@@ -55,8 +56,13 @@ export default function App() {
           <Route path="/"        element={<Home />} />
           <Route path="/about"   element={<About />} />
           <Route path="/markets" element={<Markets />} />
-          <Route path="/login"   element={<GuestRoute><Login /></GuestRoute>} />
-          <Route path="/register"element={<GuestRoute><Register /></GuestRoute>} />
+
+          {/* Guest only */}
+          <Route path="/login"    element={<GuestRoute><Login /></GuestRoute>} />
+          <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
+
+          {/* Verification — accessible without auth (user has token but not logged in yet) */}
+          <Route path="/verify" element={<VerificationPage />} />
 
           {/* Client only */}
           <Route path="/activate-trader" element={<ClientRoute><TraderActivation /></ClientRoute>} />

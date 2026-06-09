@@ -6,7 +6,7 @@ import { formatCurrency } from '../../utils/formatters';
 import './Admin.css';
 
 export default function AdminOverview() {
-  const [stats,   setStats]   = useState(null);
+  const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,11 +16,11 @@ export default function AdminOverview() {
   }, []);
 
   const STAT_CARDS = stats ? [
-    { label: 'Total Members',       value: stats.total_users,        color: 'var(--blue)',  icon: '👥' },
-    { label: 'Total Deposited',     value: formatCurrency(stats.total_deposited),   color: 'var(--green)', icon: '💰' },
-    { label: 'Platform Balance',    value: formatCurrency(stats.total_balance),     color: 'var(--cyan)',  icon: '📊' },
-    { label: 'Pending Deposits',    value: stats.pending_deposits,    color: 'var(--gold)',  icon: '⏳' },
-    { label: 'Pending Withdrawals', value: stats.pending_withdrawals, color: 'var(--red)',   icon: '📤' },
+    { label: 'Total Members', value: stats.total_users, color: 'var(--blue)', },
+    { label: 'Total Deposited', value: formatCurrency(stats.total_deposited), color: 'var(--green)', },
+    { label: 'Platform Balance', value: formatCurrency(stats.total_balance), color: 'var(--cyan)', },
+    { label: 'Pending Deposits', value: stats.pending_deposits, color: 'var(--gold)', },
+    { label: 'Pending Withdrawals', value: stats.pending_withdrawals, color: 'var(--red)', },
   ] : [];
 
   return (
@@ -52,17 +52,17 @@ export default function AdminOverview() {
               <h3>Quick Actions</h3>
               <div className="aql-grid">
                 {[
-                  { label:'View All Members',     to:'/admin/users',       icon:'👥' },
-                  { label:'Pending Deposits',     to:'/admin/deposits',    icon:'💳' },
-                  { label:'Pending Withdrawals',  to:'/admin/withdrawals', icon:'📤' },
-                  { label:'Manage Traders',       to:'/admin/traders',     icon:'📈' },
-                  { label:'Manage Wallets',       to:'/admin/wallets',     icon:'💼' },
+                  { label: 'View All Members', to: '/admin/users', },
+                  { label: 'Pending Deposits', to: '/admin/deposits', },
+                  { label: 'Pending Withdrawals', to: '/admin/withdrawals', },
+                  { label: 'Manage Traders', to: '/admin/traders', },
+                  { label: 'Manage Wallets', to: '/admin/wallets', },
                 ].map((l) => (
                   <a key={l.label} href={l.to} className="aql-card">
                     <span className="aql-icon">{l.icon}</span>
                     <span>{l.label}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                      <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </a>
                 ))}

@@ -1,0 +1,199 @@
+/* Verification-specific styles — AuthPages.css base still applies */
+
+.vp-icon-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.vp-envelope-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--blue-glow);
+  border: 1px solid var(--border-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
+
+.vp-email-display {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: var(--blue) !important;
+  margin-top: 2px !important;
+  word-break: break-all;
+}
+
+/* 5 digit input row */
+.vp-digits-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 28px 0 20px;
+}
+
+.vp-digit-input {
+  width: 56px;
+  height: 68px;
+  background: var(--navy-mid);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--off-white);
+  font-family: 'Barlow Condensed', 'Courier New', monospace;
+  font-size: 1.9rem;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  transition: var(--transition);
+  caret-color: var(--blue);
+  padding: 0;
+}
+
+.vp-digit-input:focus {
+  border-color: var(--blue);
+  background: rgba(21, 101, 255, 0.06);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.vp-digit-input.filled {
+  border-color: rgba(21, 101, 255, 0.5);
+  color: var(--blue);
+}
+
+.vp-digit-input.loading,
+.vp-digit-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.vp-verifying {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--grey);
+  margin-bottom: 14px;
+}
+
+/* Resend */
+.vp-resend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.vp-resend p {
+  font-size: 0.875rem;
+  color: var(--grey);
+  margin: 0;
+}
+
+.vp-resend-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: var(--transition);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.vp-resend-btn:hover:not(:disabled) {
+  color: var(--blue-hover);
+}
+
+.vp-resend-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.vp-countdown {
+  font-size: 0.875rem;
+  color: var(--grey);
+}
+
+.vp-countdown strong {
+  color: var(--off-white);
+}
+
+/* Left panel icon */
+.vp-left-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(21, 101, 255, 0.1);
+  border: 1px solid var(--border-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .vp-digit-input {
+    width: 48px;
+    height: 58px;
+    font-size: 1.6rem;
+  }
+
+  .vp-digits-row {
+    gap: 7px;
+  }
+}
+
+/* ── Mobile fixes ── */
+@media (max-width: 860px) {
+
+  /* Center the subtitle text on mobile */
+  .auth-form-header {
+    text-align: center;
+  }
+
+  .auth-form-header p,
+  .vp-email-display {
+    text-align: center;
+  }
+
+  /* The left panel is hidden on mobile so show the description
+     inside the right panel instead */
+  .vp-mobile-hint {
+    display: block;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--grey);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Hidden on desktop (left panel shows this info instead) */
+.vp-mobile-hint {
+  display: none;
+}
+
+@media (max-width: 1800px) {
+
+  /* Center the subtitle text on mobile */
+  .auth-form-header {
+    text-align: center;
+  }
+}

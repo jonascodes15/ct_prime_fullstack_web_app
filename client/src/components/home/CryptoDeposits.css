@@ -3,154 +3,141 @@
 ════════════════════════════════════════ */
 .cd-section {
   position: relative;
-  min-height: 560px;
+  min-height: 500px;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
   background: #000;
 }
 
-/* Pure black space top */
-.cd-bg {
+/* ── Space background ── */
+.cd-bg-space {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, #000000 0%, #040d1a 40%, #060f1e 70%, #08121f 100%);
+  background: radial-gradient(ellipse at 50% 0%, #0a0f2e 0%, #000000 65%);
   z-index: 0;
 }
 
-/* Earth — bottom portion visible, like the reference */
+/* ── Earth — bottom half visible ── */
 .cd-bg-earth {
   position: absolute;
-  bottom: -10%;
+  bottom: -55%;
   left: 50%;
   transform: translateX(-50%);
-  width: 110%;
-  max-width: 1400px;
+  width: 130%;
+  max-width: 1600px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(
-    ellipse at 30% 40%,
-    rgba(40,80,60,0.7) 0%,
-    rgba(20,50,80,0.6) 30%,
-    rgba(5,20,45,0.5) 60%,
-    rgba(0,5,15,0.4) 100%
-  );
-  background-image:
-    radial-gradient(ellipse at 30% 40%, rgba(40,80,60,0.7) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 60%, rgba(20,50,80,0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(5,25,55,0.8) 0%, transparent 80%);
-  box-shadow:
-    inset 0 0 60px rgba(255,180,80,0.06),
-    inset 60px 40px 100px rgba(255,200,100,0.04),
-    0 -20px 80px rgba(255,150,50,0.05);
-  border: 1px solid rgba(255,150,50,0.08);
   z-index: 1;
+  background:
+    radial-gradient(ellipse at 35% 38%, rgba(30,70,40,0.65) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 55%, rgba(15,40,70,0.55) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(5,20,50,0.85) 0%, transparent 75%);
+  border-top: 1px solid rgba(255,140,40,0.08);
+  box-shadow:
+    0 -30px 100px rgba(255,140,40,0.04),
+    inset 50px 30px 120px rgba(255,190,80,0.04);
 }
 
-/* City lights effect on earth */
+/* City lights dots on earth */
 .cd-bg-earth::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background-image:
-    radial-gradient(circle at 25% 45%, rgba(255,220,100,0.25) 1px, transparent 2px),
-    radial-gradient(circle at 40% 55%, rgba(255,220,100,0.2) 1px, transparent 2px),
-    radial-gradient(circle at 55% 48%, rgba(255,220,100,0.18) 1px, transparent 1px),
-    radial-gradient(circle at 65% 58%, rgba(255,220,100,0.2) 1px, transparent 2px),
-    radial-gradient(circle at 35% 60%, rgba(255,220,100,0.15) 1px, transparent 1px),
-    radial-gradient(circle at 72% 44%, rgba(255,220,100,0.2) 1px, transparent 2px),
-    radial-gradient(circle at 80% 52%, rgba(255,220,100,0.18) 1px, transparent 1px),
-    radial-gradient(circle at 20% 52%, rgba(255,220,100,0.15) 1px, transparent 1px),
-    radial-gradient(circle at 48% 62%, rgba(255,220,100,0.2) 1px, transparent 2px);
-  background-size: 4px 4px, 6px 6px, 3px 3px, 5px 5px, 4px 4px, 5px 5px, 3px 3px, 4px 4px, 6px 6px;
+    radial-gradient(circle at 28% 42%, rgba(255,220,100,0.3) 1.5px, transparent 2px),
+    radial-gradient(circle at 38% 50%, rgba(255,220,100,0.25) 1px,   transparent 2px),
+    radial-gradient(circle at 52% 46%, rgba(255,220,100,0.22) 1.5px, transparent 2px),
+    radial-gradient(circle at 62% 55%, rgba(255,220,100,0.28) 1px,   transparent 2px),
+    radial-gradient(circle at 44% 60%, rgba(255,220,100,0.2) 1px,    transparent 2px),
+    radial-gradient(circle at 71% 44%, rgba(255,220,100,0.25) 1.5px, transparent 2px),
+    radial-gradient(circle at 78% 52%, rgba(255,220,100,0.22) 1px,   transparent 2px),
+    radial-gradient(circle at 22% 54%, rgba(255,220,100,0.18) 1px,   transparent 2px),
+    radial-gradient(circle at 55% 62%, rgba(255,220,100,0.24) 1.5px, transparent 2px),
+    radial-gradient(circle at 33% 58%, rgba(255,220,100,0.2) 1px,    transparent 2px);
 }
 
 /* ── Orbital rings ── */
-.cd-orbitals {
+.cd-orbit {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.07);
+  transform: translateX(-50%) rotateX(75deg);
   z-index: 2;
   pointer-events: none;
 }
-
-.cd-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.07);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotateX(72deg);
-}
-.cd-ring-1 {
-  width: 70%;
+.cd-orbit-1 {
+  width: 60%;
   aspect-ratio: 1;
+  top: 20%;
 }
-.cd-ring-2 {
-  width: 90%;
+.cd-orbit-2 {
+  width: 82%;
   aspect-ratio: 1;
+  top: 8%;
   border-color: rgba(255,255,255,0.04);
 }
 
 /* ── Text content ── */
 .cd-content {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   text-align: center;
-  padding: 64px 24px 40px;
-  max-width: 700px;
-  margin: 0 auto;
+  padding: 56px 24px 40px;
+  pointer-events: auto;
 }
 
 .cd-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 20px;
   font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 18px;
+  display: block;
 }
 
 .cd-content h2 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, 4vw, 3.1rem);
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 12px;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 .cd-content p {
   font-size: 1rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.5);
   margin-bottom: 28px;
 }
 
-.cd-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 14px 44px;
+.cd-cta {
+  display: inline-block;
+  padding: 14px 52px;
   background: #1565ff;
   color: #fff;
+  font-family: 'Barlow', sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 5px;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 24px rgba(21,101,255,0.4);
-  font-family: 'Barlow', sans-serif;
+  box-shadow: 0 4px 28px rgba(21,101,255,0.45);
 }
-.cd-btn:hover {
+.cd-cta:hover {
   background: #1a6cff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(21,101,255,0.5);
+  box-shadow: 0 8px 36px rgba(21,101,255,0.55);
 }
 
-/* ── Floating coin logos ── */
-.cd-coins {
+/* ── Floating coins layer ── */
+.cd-coins-layer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
 }
 
@@ -158,45 +145,36 @@
   position: absolute;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: rgba(15,20,35,0.88);
-  border: 1.5px solid rgba(255,255,255,0.12);
+  /* Dark background like the reference */
+  background: rgba(12, 16, 28, 0.9);
+  border: 1.5px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 14%;
   box-shadow:
-    0 4px 20px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(255,255,255,0.06);
-  animation: coinFloat 5s ease-in-out infinite;
-  backdrop-filter: blur(4px);
+    0 6px 24px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  animation: cdFloat linear infinite;
+  animation-timing-function: ease-in-out;
 }
 
 .cd-coin svg {
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: 50%;
 }
 
-/* Staggered float animation */
-@keyframes coinFloat {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-  50%       { transform: translate(-50%, -50%) translateY(-12px); }
+@keyframes cdFloat {
+  0%,100% { transform: translate(-50%, -50%) translateY(0px);   }
+  50%      { transform: translate(-50%, -50%) translateY(-14px); }
 }
-
-/* Each coin gets a slightly different float rhythm */
-.cd-coin:nth-child(1) { animation-duration: 4.8s; animation-delay: 0s; }
-.cd-coin:nth-child(2) { animation-duration: 5.5s; animation-delay: 0.4s; }
-.cd-coin:nth-child(3) { animation-duration: 4.2s; animation-delay: 0.8s; }
-.cd-coin:nth-child(4) { animation-duration: 6.0s; animation-delay: 1.2s; }
-.cd-coin:nth-child(5) { animation-duration: 5.1s; animation-delay: 0.6s; }
-.cd-coin:nth-child(6) { animation-duration: 4.6s; animation-delay: 1.0s; }
-.cd-coin:nth-child(7) { animation-duration: 5.8s; animation-delay: 0.9s; }
-.cd-coin:nth-child(8) { animation-duration: 4.4s; animation-delay: 1.4s; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .cd-section   { min-height: 480px; }
-  .cd-content   { padding: 48px 20px 24px; }
-  /* Shrink coins a bit on mobile */
-  .cd-coin:nth-child(n+5) { display: none; }
+  .cd-section { min-height: 420px; }
+  .cd-content { padding: 44px 20px 28px; }
+  /* Hide smaller coins on mobile */
+  .cd-coin:nth-child(n+7) { display: none; }
 }

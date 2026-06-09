@@ -5,10 +5,9 @@ import { authService } from '../services/authService';
 import './AuthPages.css';
 
 export default function Register() {
-  const [form, setForm] = useState({ full_name: '', email: '', password: '', confirm_password: '' });
-  const [error, setError] = useState('');
+  const [form, setForm]       = useState({ full_name: '', email: '', password: '', confirm_password: '' });
+  const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,15 +15,28 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (form.password !== form.confirm_password) return setError('Passwords do not match.');
-    if (form.password.length < 8) return setError('Password must be at least 8 characters.');
+    if (form.password !== form.confirm_password)
+      return setError('Passwords do not match.');
+    if (form.password.length < 8)
+      return setError('Password must be at least 8 characters.');
+
     setLoading(true);
     try {
       const { data } = await authService.register({
-        full_name: form.full_name, email: form.email, password: form.password,
+        full_name: form.full_name,
+        email:     form.email,
+        password:  form.password,
       });
-      login({ full_name: form.full_name, email: form.email, role: 'client' }, data.token);
-      navigate('/activate-trader');
+
+      // Always redirect to verify after registration
+      navigate('/verify', {
+        state: {
+          email:     form.email,
+          token:     data.token,
+          full_name: form.full_name,
+          user:      { full_name: form.full_name, email: form.email, role: 'client' },
+        },
+      });
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
@@ -34,17 +46,22 @@ export default function Register() {
 
   return (
     <div className="auth-page">
+      {/* Left decorative panel */}
       <div className="auth-left">
         <div className="auth-left-bg" />
         <div className="auth-left-orb" />
         <div className="auth-left-top">
           <Link to="/" className="auth-back-home">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
             Back to Home
           </Link>
           <div className="auth-left-logo">
-            <span className="logo-mark">◈</span>
-            PRIME<em>COPY</em>TRADE
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <path d="M8 32 L16 8 L24 20 L32 8" stroke="#1565ff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            COPY TRADE<em>PRIME</em>
           </div>
         </div>
         <div className="auth-left-content">
@@ -53,10 +70,10 @@ export default function Register() {
         </div>
         <div className="auth-left-stats">
           {[
-            { val: '$0', label: 'Account Fee' },
-            { val: '0.2', label: 'FX Pips From' },
-            { val: '100%', label: 'Transparent' },
-            { val: '24/7', label: 'Support' },
+            { val: '$0',   label: 'Account Fee'  },
+            { val: '0.2',  label: 'FX Pips From' },
+            { val: '100%', label: 'Transparent'  },
+            { val: '24/7', label: 'Support'       },
           ].map((s) => (
             <div key={s.label} className="als-card">
               <span className="als-val">{s.val}</span>
@@ -66,10 +83,13 @@ export default function Register() {
         </div>
       </div>
 
+      {/* Right form panel */}
       <div className="auth-right">
         <div className="auth-form-wrap">
           <Link to="/" className="auth-mobile-back">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
             Back to Home
           </Link>
 
@@ -83,26 +103,53 @@ export default function Register() {
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" name="full_name" placeholder="John Doe"
-                value={form.full_name} onChange={handleChange} required />
+              <input
+                type="text"
+                name="full_name"
+                placeholder="John Doe"
+                value={form.full_name}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
               <label>Email Address</label>
-              <input type="email" name="email" placeholder="you@example.com"
-                value={form.email} onChange={handleChange} required />
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input type="password" name="password" placeholder="Minimum 8 characters"
-                value={form.password} onChange={handleChange} required />
+              <input
+                type="password"
+                name="password"
+                placeholder="Minimum 8 characters"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
               <label>Confirm Password</label>
-              <input type="password" name="confirm_password" placeholder="Repeat your password"
-                value={form.confirm_password} onChange={handleChange} required />
+              <input
+                type="password"
+                name="confirm_password"
+                placeholder="Repeat your password"
+                value={form.confirm_password}
+                onChange={handleChange}
+                required
+              />
             </div>
             <button type="submit" className="btn-primary auth-submit" disabled={loading}>
-              {loading ? <span className="spinner-ring" style={{ width: 18, height: 18 }} /> : 'Create Account'}
+              {loading
+                ? <span className="spinner-ring" style={{ width: 18, height: 18 }} />
+                : 'Create Account'
+              }
             </button>
           </form>
 

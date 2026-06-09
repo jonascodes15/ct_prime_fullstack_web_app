@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 import './HeroSection.css';
 
 // Free-to-use trading video clips from public CDNs
-const VIDEO_SOURCES = [
-  'https://assets.mixkit.co/videos/preview/mixkit-trading-in-a-stock-market-3765-large.mp4',
-  'https://assets.mixkit.co/videos/preview/mixkit-stock-market-charts-on-screens-3764-large.mp4',
-];
+const VIDEO_SOURCES = ['/videos/hero.mp4'];
 
 export default function HeroSection() {
   return (
@@ -14,12 +11,13 @@ export default function HeroSection() {
       <div className="hero-video-wrap">
         <video
           className="hero-video"
-          autoPlay muted loop playsInline
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          playsInline={true}
           poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=80"
         >
-          {VIDEO_SOURCES.map((src, i) => (
-            <source key={i} src={src} type="video/mp4" />
-          ))}
+          <source src={VIDEO_SOURCES[0]} type="video/mp4" />
         </video>
         <div className="hero-overlay" />
       </div>
@@ -30,9 +28,9 @@ export default function HeroSection() {
           <p className="hero-eyebrow animate-up">The #1 Copy Trading Platform</p>
 
           <h1 className="hero-title animate-up" style={{ animationDelay: '0.1s' }}>
-            Innovative Platform for<br />
-            Smart Investments and<br />
-            <span className="hero-blue">Copy Trading</span>
+            Trade Alongside the Pros.<br />
+            Maximize Your Portfolio with
+            <span className="hero-blue"> Copy Trading</span>
           </h1>
 
           <p className="hero-sub animate-up" style={{ animationDelay: '0.2s' }}>
@@ -44,7 +42,7 @@ export default function HeroSection() {
           <div className="hero-actions animate-up" style={{ animationDelay: '0.3s' }}>
             <Link to="/register" className="btn-primary hero-btn">
               Open an Account
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
             <Link to="/login" className="hero-btn-ghost">Sign In</Link>
           </div>
@@ -52,10 +50,10 @@ export default function HeroSection() {
           {/* Stats row */}
           <div className="hero-stats animate-up" style={{ animationDelay: '0.4s' }}>
             {[
-              { val: '400K+',  label: 'Active Clients' },
+              { val: '400K+', label: 'Active Clients' },
               { val: '2,100+', label: 'Markets' },
-              { val: '150+',   label: 'Countries' },
-              { val: '7+',     label: 'Years Experience' },
+              { val: '150+', label: 'Countries' },
+              { val: '12+', label: 'Years Experience' },
             ].map((s) => (
               <div key={s.label} className="hstat">
                 <span className="hstat-val">{s.val}</span>

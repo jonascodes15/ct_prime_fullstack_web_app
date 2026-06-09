@@ -19,10 +19,31 @@ export default function Login() {
     setLoading(true);
     try {
       const { data } = await authService.login(form);
+
+      // Unverified user — redirect to verification page
+      if (data.needsVerification) {
+        navigate('/verify', {
+          state: {
+            email:     data.email,
+            full_name: data.full_name,
+            // no token yet — they must verify before getting one
+          },
+        });
+        return;
+      }
+
       login({ full_name: data.full_name, email: form.email, role: data.role }, data.token);
       navigate(data.requiresTraderActivation ? '/activate-trader' : '/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password.');
+      const d = err.response?.data;
+      // Server returned 403 with needsVerification
+      if (d?.needsVerification) {
+        navigate('/verify', {
+          state: { email: d.email, full_name: d.full_name },
+        });
+        return;
+      }
+      setError(d?.message || 'Invalid email or password.');
     } finally {
       setLoading(false);
     }
@@ -36,12 +57,16 @@ export default function Login() {
         <div className="auth-left-orb" />
         <div className="auth-left-top">
           <Link to="/" className="auth-back-home">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
             Back to Home
           </Link>
           <div className="auth-left-logo">
-            <span className="logo-mark">◈</span>
-            PRIME<em>COPY</em>TRADE
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <path d="M8 32 L16 8 L24 20 L32 8" stroke="#1565ff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            COPY TRADE<em>PRIME</em>
           </div>
         </div>
         <div className="auth-left-content">
@@ -51,9 +76,9 @@ export default function Login() {
         <div className="auth-left-stats">
           {[
             { val: '400K+',  label: 'Active Traders' },
-            { val: '2100+',  label: 'Markets' },
-            { val: '7+ Yrs', label: 'Experience' },
-            { val: '150+',   label: 'Countries' },
+            { val: '2100+',  label: 'Markets'         },
+            { val: '7+ Yrs', label: 'Experience'      },
+            { val: '150+',   label: 'Countries'       },
           ].map((s) => (
             <div key={s.label} className="als-card">
               <span className="als-val">{s.val}</span>
@@ -67,7 +92,9 @@ export default function Login() {
       <div className="auth-right">
         <div className="auth-form-wrap">
           <Link to="/" className="auth-mobile-back">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
             Back to Home
           </Link>
 
@@ -81,16 +108,31 @@ export default function Login() {
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Email Address</label>
-              <input type="email" name="email" placeholder="you@example.com"
-                value={form.email} onChange={handleChange} required />
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input type="password" name="password" placeholder="Enter your password"
-                value={form.password} onChange={handleChange} required />
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
             </div>
             <button type="submit" className="btn-primary auth-submit" disabled={loading}>
-              {loading ? <span className="spinner-ring" style={{ width:18, height:18 }} /> : 'Sign In'}
+              {loading
+                ? <span className="spinner-ring" style={{ width: 18, height: 18 }} />
+                : 'Sign In'
+              }
             </button>
           </form>
 
