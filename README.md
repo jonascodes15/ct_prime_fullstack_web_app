@@ -4,7 +4,7 @@ Full-stack copy trading platform — React + Node.js + MySQL.
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 copytradeprime/
@@ -16,7 +16,7 @@ copytradeprime/
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Database
 
@@ -57,13 +57,13 @@ App runs on **http://localhost:5173**
 
 ---
 
-## 🔑 Admin Account
+##  Admin Account
 
 After running schema.sql, log in with:
 - **Email:** admin@copytradeprime.com
 - **Password:** Admin@123456
 
-⚠️ **Change this immediately** after first login by updating the hash:
+ **Change this immediately** after first login by updating the hash:
 ```bash
 node -e "const b=require('bcrypt'); b.hash('YourNewPassword',12).then(console.log)"
 ```
@@ -74,35 +74,35 @@ UPDATE users SET password_hash='<new_hash>' WHERE email='admin@copytradeprime.co
 
 ---
 
-## 🌐 API Endpoints
+##  API Endpoints
 
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | POST | `/api/auth/register` | — | Register |
 | POST | `/api/auth/login` | — | Login |
-| GET | `/api/auth/me` | ✅ | Get profile |
-| GET | `/api/dashboard` | ✅ | Dashboard data |
-| GET | `/api/traders` | ✅ | List traders |
-| POST | `/api/traders/activate` | ✅ | Activate trader |
-| GET | `/api/deposits/wallets` | ✅ | Crypto wallets |
-| POST | `/api/deposits` | ✅ | Submit deposit |
-| GET | `/api/withdrawals` | ✅ | Withdrawal history |
-| POST | `/api/withdrawals` | ✅ | Request withdrawal |
-| GET | `/api/admin/stats` | 🔒 Admin | Platform stats |
-| GET | `/api/admin/users` | 🔒 Admin | All users |
-| PATCH | `/api/admin/users/:id/balance` | 🔒 Admin | Update balance |
-| POST | `/api/admin/earnings` | 🔒 Admin | Add earnings |
-| POST | `/api/admin/trades` | 🔒 Admin | Add trade |
-| GET | `/api/admin/deposits` | 🔒 Admin | All deposits |
-| PATCH | `/api/admin/deposits/:id` | 🔒 Admin | Confirm/reject deposit |
-| GET | `/api/admin/withdrawals` | 🔒 Admin | All withdrawals |
-| PATCH | `/api/admin/withdrawals/:id` | 🔒 Admin | Approve/reject withdrawal |
-| GET | `/api/admin/wallets` | 🔒 Admin | Manage wallets |
-| POST | `/api/admin/wallets` | 🔒 Admin | Add wallet |
+| GET | `/api/auth/me` | + | Get profile |
+| GET | `/api/dashboard` | + | Dashboard data |
+| GET | `/api/traders` | + | List traders |
+| POST | `/api/traders/activate` | + | Activate trader |
+| GET | `/api/deposits/wallets` | + | Crypto wallets |
+| POST | `/api/deposits` | + | Submit deposit |
+| GET | `/api/withdrawals` | + | Withdrawal history |
+| POST | `/api/withdrawals` | + | Request withdrawal |
+| GET | `/api/admin/stats` |  Admin | Platform stats |
+| GET | `/api/admin/users` |  Admin | All users |
+| PATCH | `/api/admin/users/:id/balance` |  Admin | Update balance |
+| POST | `/api/admin/earnings` |  Admin | Add earnings |
+| POST | `/api/admin/trades` |  Admin | Add trade |
+| GET | `/api/admin/deposits` |  Admin | All deposits |
+| PATCH | `/api/admin/deposits/:id` |  Admin | Confirm/reject deposit |
+| GET | `/api/admin/withdrawals` |  Admin | All withdrawals |
+| PATCH | `/api/admin/withdrawals/:id` |  Admin | Approve/reject withdrawal |
+| GET | `/api/admin/wallets` |  Admin | Manage wallets |
+| POST | `/api/admin/wallets` |  Admin | Add wallet |
 
 ---
 
-## 📦 Adding Crypto Wallets
+##  Adding Crypto Wallets
 
 Use the admin API to insert wallet addresses:
 
