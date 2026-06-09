@@ -178,7 +178,7 @@ exports.sendVerification = async (req, res, next) => {
     if (!user) return res.status(404).json({ message: 'User not found.' });
     if (user.is_verified) return res.status(400).json({ message: 'Account already verified.' });
 
-    const code    = generateCode();
+    const code = generateCode();
     const expires = expiresAt();
 
     await db.execute(
@@ -187,10 +187,10 @@ exports.sendVerification = async (req, res, next) => {
     );
 
     await resend.emails.send({
-      from:    `CopyTradePrime <onboarding@resend.dev>`,
-      to:      [email],
+      from: `CopyTradePrime <noreply@copytradeprime.com>`,
+      to: [email],
       subject: `Your Verification Code: ${code}`,
-      html:    buildEmailHtml(code, user.full_name),
+      html: buildEmailHtml(code, user.full_name),
     });
 
     res.json({ message: 'Verification code sent.' });
@@ -212,7 +212,7 @@ exports.verifyCode = async (req, res, next) => {
       [email]
     );
 
-    if (!user)           return res.status(404).json({ message: 'User not found.' });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
     if (user.is_verified) return res.status(400).json({ message: 'Account already verified.' });
     if (!user.verification_code)
       return res.status(400).json({ message: 'No verification code found. Please request a new one.' });
@@ -247,10 +247,10 @@ exports.resendCode = async (req, res, next) => {
       'SELECT id, full_name, is_verified FROM users WHERE email = ?', [email]
     );
 
-    if (!user)            return res.status(404).json({ message: 'User not found.' });
-    if (user.is_verified)  return res.status(400).json({ message: 'Account already verified.' });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+    if (user.is_verified) return res.status(400).json({ message: 'Account already verified.' });
 
-    const code    = generateCode();
+    const code = generateCode();
     const expires = expiresAt();
 
     await db.execute(
@@ -259,10 +259,10 @@ exports.resendCode = async (req, res, next) => {
     );
 
     await resend.emails.send({
-      from:    `CopyTradePrime <onboarding@resend.dev>`,
-      to:      [email],
+      from: `CopyTradePrime <onboarding@resend.dev>`,
+      to: [email],
       subject: `Your Verification Code: ${code}`,
-      html:    buildEmailHtml(code, user.full_name),
+      html: buildEmailHtml(code, user.full_name),
     });
 
     res.json({ message: 'A new verification code has been sent.' });

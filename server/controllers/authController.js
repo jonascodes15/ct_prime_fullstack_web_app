@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const db     = require('../config/db');
+const db = require('../config/db');
 const { sign } = require('../utils/jwt');
 const { Resend } = require('resend');
 
@@ -36,7 +36,7 @@ exports.register = async (req, res, next) => {
     await db.execute('INSERT INTO account_balances (user_id) VALUES (?)', [userId]);
 
     // Generate and store verification code
-    const code    = generateCode();
+    const code = generateCode();
     const expires = expiresAt();
     await db.execute(
       'UPDATE users SET verification_code = ?, code_expires_at = ? WHERE id = ?',
@@ -45,10 +45,10 @@ exports.register = async (req, res, next) => {
 
     // Send verification email (non-blocking)
     resend.emails.send({
-      from:    'CopyTradePrime <onboarding@resend.dev>',
-      to:      [email],
+      from: 'CopyTradePrime <noreply@copytradeprime.com>',
+      to: [email],
       subject: `Your Verification Code: ${code}`,
-      html:    buildVerificationEmail(code, full_name),
+      html: buildVerificationEmail(code, full_name),
     }).catch((e) => console.error('Verification email failed:', e.message));
 
     const token = sign({ id: userId, role: 'client' });
@@ -77,24 +77,24 @@ exports.login = async (req, res, next) => {
 
     // Block unverified users — send a fresh code
     if (!user.is_verified) {
-      const code    = generateCode();
+      const code = generateCode();
       const expires = expiresAt();
       await db.execute(
         'UPDATE users SET verification_code = ?, code_expires_at = ? WHERE id = ?',
         [code, expires, user.id]
       );
       resend.emails.send({
-        from:    'CopyTradePrime <onboarding@resend.dev>',
-        to:      [email],
+        from: 'CopyTradePrime <onboarding@resend.dev>',
+        to: [email],
         subject: `Your Verification Code: ${code}`,
-        html:    buildVerificationEmail(code, user.full_name),
+        html: buildVerificationEmail(code, user.full_name),
       }).catch((e) => console.error('Verification email failed:', e.message));
 
       return res.status(403).json({
-        message:           'Please verify your email before signing in.',
+        message: 'Please verify your email before signing in.',
         needsVerification: true,
-        email:             user.email,
-        full_name:         user.full_name,
+        email: user.email,
+        full_name: user.full_name,
       });
     }
 
@@ -106,8 +106,8 @@ exports.login = async (req, res, next) => {
     res.json({
       token,
       full_name: user.full_name,
-      email:     user.email,
-      role:      user.role,
+      email: user.email,
+      role: user.role,
       requiresTraderActivation: !trader,
     });
   } catch (err) {
