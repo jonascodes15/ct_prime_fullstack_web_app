@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Sidebar from '../../components/common/Sidebar';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import api from '../../services/api';
@@ -58,13 +59,13 @@ export default function AdminOverview() {
                   { label: 'Manage Traders', to: '/admin/traders', },
                   { label: 'Manage Wallets', to: '/admin/wallets', },
                 ].map((l) => (
-                  <a key={l.label} href={l.to} className="aql-card">
+                  <Link key={l.label} to={l.to} className="aql-card">
                     <span className="aql-icon">{l.icon}</span>
                     <span>{l.label}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

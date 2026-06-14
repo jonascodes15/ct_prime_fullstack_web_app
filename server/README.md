@@ -118,7 +118,7 @@ server/
 
 ### 1. Clone and install
 ```bash
-git clone https://github.com/yourusername/copytradeprime.git
+git clone https://github.com/jonascodes15/copytradeprime.git
 cd copytradeprime/server
 npm install
 ```

@@ -60,7 +60,7 @@ const SWITCH_FEATURES = [
   },
   {
     title: 'Safe & Secure',
-    desc: "Prime Copy Trade is regulated by the world's biggest supervision authorities, including the Financial Conduct Authority.",
+    desc: "Copy Trade Prime is regulated by the world's biggest supervision authorities, including the Financial Conduct Authority.",
     svg: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#333" strokeWidth="1.8">
         <path d="M20 6 L34 12 L34 22 C34 29 27 34 20 36 C13 34 6 29 6 22 L6 12 Z" />
@@ -94,7 +94,7 @@ const SWITCH_FEATURES = [
   },
   {
     title: '495,000+ customers',
-    desc: 'With years of activity in the financial markets, Prime Copy Trade has gained thousands of customers.',
+    desc: 'With years of activity in the financial markets, Copy Trade Prime has gained thousands of customers.',
     svg: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#333" strokeWidth="1.8">
         <circle cx="14" cy="14" r="5" />
@@ -121,8 +121,8 @@ function SwitchSection() {
     <section className="section-light">
       <div className="section-inner">
         <div className="section-hdr centered">
-          <h2>Switch To Prime Copy Trade</h2>
-          <p>At Prime Copy Trade we work hard to enhance your trading experience. As a global, 5 star rated broker, our client's satisfaction is in the center of our focus.</p>
+          <h2>Switch To Copy Trade Prime</h2>
+          <p>At Copy Trade Prime we work hard to enhance your trading experience. As a global, 5 star rated broker, our client's satisfaction is in the center of our focus.</p>
         </div>
         <div className="switch-grid">
           {SWITCH_FEATURES.map((f) => (
@@ -284,7 +284,7 @@ const RATINGS = [
 ];
 
 const REVIEWS = [
-  { name: 'Vivian T. Vachon', text: "Prime Copy Trade runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail." },
+  { name: 'Vivian T. Vachon', text: "Copy Trade Prime runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail." },
   { name: 'Jack Thompson', text: "I was an engineer in Washington DC when an account manager brought this opportunity to me. I just said casually to invest with £500 but my story today is on a premium plan." },
   { name: 'Robert Prickett', text: "I have only been a member for a few months and I have already earned a decent amount of money. Finally a real and honest company that does what it says. Thank you so much for this great opportunity!" },
 ];

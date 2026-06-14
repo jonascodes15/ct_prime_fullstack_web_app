@@ -11,10 +11,11 @@ export default function HeroSection() {
       <div className="hero-video-wrap">
         <video
           className="hero-video"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-          playsInline={true}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
           poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=80"
         >
           <source src={VIDEO_SOURCES[0]} type="video/mp4" />
