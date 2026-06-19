@@ -38,10 +38,10 @@ exports.updateBalance = async (req, res, next) => {
     const uid = req.params.id;
 
     const fields = [];
-    const vals   = [];
-    if (balance        !== undefined) { fields.push('balance = ?');         vals.push(balance); }
-    if (total_profit   !== undefined) { fields.push('total_profit = ?');    vals.push(total_profit); }
-    if (total_deposited!== undefined) { fields.push('total_deposited = ?'); vals.push(total_deposited); }
+    const vals = [];
+    if (balance !== undefined) { fields.push('balance = ?'); vals.push(balance); }
+    if (total_profit !== undefined) { fields.push('total_profit = ?'); vals.push(total_profit); }
+    if (total_deposited !== undefined) { fields.push('total_deposited = ?'); vals.push(total_deposited); }
 
     if (!fields.length) return res.status(400).json({ message: 'No fields to update.' });
 
@@ -290,11 +290,11 @@ exports.updateTrader = async (req, res, next) => {
 // GET /api/admin/stats
 exports.getStats = async (req, res, next) => {
   try {
-    const [[{ total_users }]]      = await db.execute('SELECT COUNT(*) AS total_users FROM users WHERE role="client"');
-    const [[{ total_deposited }]]  = await db.execute('SELECT SUM(total_deposited) AS total_deposited FROM account_balances');
-    const [[{ pending_deposits }]] = await db.execute('SELECT COUNT(*) AS pending_deposits FROM deposits WHERE status="pending"');
-    const [[{ pending_withdrawals }]] = await db.execute('SELECT COUNT(*) AS pending_withdrawals FROM withdrawals WHERE status="pending"');
-    const [[{ total_balance }]]    = await db.execute('SELECT SUM(balance) AS total_balance FROM account_balances');
+    const [[{ total_users }]] = await db.execute("SELECT COUNT(*) AS total_users FROM users WHERE role='client'");
+    const [[{ total_deposited }]] = await db.execute("SELECT SUM(total_deposited) AS total_deposited FROM account_balances");
+    const [[{ pending_deposits }]] = await db.execute("SELECT COUNT(*) AS pending_deposits FROM deposits WHERE status='pending'");
+    const [[{ pending_withdrawals }]] = await db.execute("SELECT COUNT(*) AS pending_withdrawals FROM withdrawals WHERE status='pending'");
+    const [[{ total_balance }]] = await db.execute("SELECT SUM(balance) AS total_balance FROM account_balances");
 
     res.json({ total_users, total_deposited, pending_deposits, pending_withdrawals, total_balance });
   } catch (err) { next(err); }
