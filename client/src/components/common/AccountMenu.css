@@ -1,0 +1,204 @@
+/* ══════════════════════════════════════
+   ACCOUNT MENU — hamburger + panel
+   Shown in top-right on ALL screen sizes
+   for client users
+══════════════════════════════════════ */
+
+.acct-menu-wrap {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 500;
+}
+
+/* ── Trigger button ── */
+.acct-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.acct-trigger:hover,
+.acct-trigger.open {
+  border-color: var(--border-blue);
+  background: var(--navy-light, #162038);
+}
+
+.acct-trigger-avatar {
+  width: 30px; height: 30px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.acct-trigger-icon {
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+}
+.acct-trigger:hover .acct-trigger-icon,
+.acct-trigger.open  .acct-trigger-icon { color: var(--off-white); }
+
+/* ── Backdrop ── */
+.acct-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 490;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.18s ease;
+}
+
+/* ── Panel ── */
+.acct-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 300px;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  overflow: hidden;
+  z-index: 510;
+  animation: slideDown 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes slideDown {
+  from { opacity:0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0)      scale(1);    }
+}
+
+/* User header */
+.acct-panel-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 18px 16px;
+}
+
+.acct-panel-avatar {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.acct-panel-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--off-white);
+  margin-bottom: 2px;
+}
+.acct-panel-email {
+  font-size: 0.75rem;
+  color: var(--grey);
+  word-break: break-all;
+}
+
+.acct-panel-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* Nav items */
+.acct-panel-nav {
+  padding: 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.acct-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: var(--radius-md);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.acct-nav-item:hover,
+.acct-nav-item.active { background: rgba(255,255,255,0.05); }
+.acct-nav-item.active .acct-nav-label { color: var(--blue); }
+
+.acct-nav-icon {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--grey);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.acct-nav-item:hover .acct-nav-icon { border-color: var(--border-blue); color: var(--blue); }
+
+.acct-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.acct-nav-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--off-white);
+}
+.acct-nav-desc {
+  font-size: 0.72rem;
+  color: var(--grey-dark);
+}
+
+.acct-nav-arrow {
+  color: var(--grey-dark);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.acct-nav-item:hover .acct-nav-arrow { color: var(--grey); transform: translateX(2px); }
+
+/* Logout */
+.acct-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+.acct-logout-btn:hover { background: rgba(255,61,87,0.07); }
+
+/* ── Mobile adjustments ── */
+@media (max-width: 900px) {
+  .acct-menu-wrap { top: 12px; right: 12px; }
+  .acct-panel { width: 280px; }
+}

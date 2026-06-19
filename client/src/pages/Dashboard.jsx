@@ -4,6 +4,8 @@ import Sidebar from '../components/common/Sidebar';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { dashboardService } from '../services/dataServices';
 import { formatCurrency, formatDate } from '../utils/formatters';
+import BottomNav from '../components/common/BottomNav';
+import AccountMenu from '../components/common/AccountMenu';
 import './Dashboard.css';
 
 export default function Dashboard() {
@@ -21,6 +23,7 @@ export default function Dashboard() {
   return (
     <div className="app-layout">
       <Sidebar />
+      <AccountMenu />
       <main className="app-main">
 
         {/* Header — NO deposit/withdraw buttons here */}
@@ -131,6 +134,7 @@ export default function Dashboard() {
           </>
         )}
       </main>
+      <BottomNav />
     </div>
   );
 }

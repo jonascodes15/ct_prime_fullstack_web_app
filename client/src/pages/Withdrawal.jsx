@@ -3,6 +3,8 @@ import Sidebar from '../components/common/Sidebar';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { withdrawalService } from '../services/dataServices';
 import { formatCurrency, formatDate } from '../utils/formatters';
+import BottomNav from '../components/common/BottomNav';
+import AccountMenu from '../components/common/AccountMenu';
 import './Withdrawal.css';
 
 const COINS = ['BTC', 'ETH', 'USDT', 'BNB', 'SOL', 'USDC', 'TRX', 'LTC', 'XRP', 'DOGE'];
@@ -53,6 +55,7 @@ export default function Withdrawal() {
   return (
     <div className="app-layout">
       <Sidebar />
+      <AccountMenu />
       <main className="app-main">
         <div className="dash-header">
           <div>
@@ -164,6 +167,7 @@ export default function Withdrawal() {
           </div>
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }

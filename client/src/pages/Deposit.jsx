@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/common/Sidebar';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { depositService } from '../services/dataServices';
+import BottomNav from '../components/common/BottomNav';
+import AccountMenu from '../components/common/AccountMenu';
 import './Deposit.css';
 
 export default function Deposit() {
@@ -46,6 +48,7 @@ export default function Deposit() {
   return (
     <div className="app-layout">
       <Sidebar />
+      <AccountMenu />
       <main className="app-main">
         <div className="dash-header">
           <div>
@@ -166,6 +169,7 @@ export default function Deposit() {
           </div>
         )}
       </main>
+      <BottomNav />
     </div>
   );
 }

@@ -1,0 +1,74 @@
+.app-main-markets { padding-bottom: 100px; }
+
+/* Tab bar */
+.lm-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.lm-tabs::-webkit-scrollbar { display: none; }
+
+.lm-tab {
+  flex: 1;
+  min-width: 90px;
+  padding: 9px 16px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--grey);
+  font-size: 0.855rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  white-space: nowrap;
+}
+.lm-tab:hover  { color: var(--off-white); background: rgba(255,255,255,0.04); }
+.lm-tab.active { background: var(--blue); color: #fff; font-weight: 600; }
+
+/* Heat maps */
+.lm-heatmaps-row { margin-bottom: 20px; }
+
+.lm-heatmap-wrap {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.lm-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--grey);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+}
+.lm-section-label svg { stroke: var(--blue); }
+
+.lm-widget-box { width: 100%; }
+
+/* Screener */
+.lm-screener-section {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.lm-screener-wrap { width: 100%; }
+
+@media (max-width: 640px) {
+  .lm-tab { min-width: 76px; font-size: 0.8rem; }
+}

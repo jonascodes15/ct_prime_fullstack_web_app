@@ -10,6 +10,7 @@ const traderRoutes     = require('./routes/traderRoutes');
 const depositRoutes    = require('./routes/depositRoutes');
 const withdrawalRoutes = require('./routes/withdrawalRoutes');
 const adminRoutes      = require('./routes/adminRoutes');
+const accountRoutes    = require('./routes/accountRoutes');
 const errorHandler     = require('./middleware/errorHandler');
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/traders',     traderRoutes);
 app.use('/api/deposits',    depositRoutes);
 app.use('/api/withdrawals', withdrawalRoutes);
 app.use('/api/admin',       adminRoutes);
+app.use('/api/account',     accountRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));

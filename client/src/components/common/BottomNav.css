@@ -1,0 +1,95 @@
+/* ══════════════════════════════════════
+   BOTTOM NAVIGATION BAR
+   Visible on mobile + tablet (≤900px)
+   Hidden on desktop — sidebar handles it
+══════════════════════════════════════ */
+.bottom-nav {
+  display: none; /* desktop: hidden */
+}
+
+@media (max-width: 900px) {
+  .bottom-nav {
+    display: flex;
+    align-items: stretch;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    background: rgba(9, 15, 26, 0.97);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px); /* iPhone notch */
+    height: calc(62px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .bn-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 2px 6px;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    min-width: 0;
+  }
+
+  .bn-tab:hover { color: rgba(255,255,255,0.65); }
+
+  .bn-tab.bn-active { color: #1565ff; }
+
+  .bn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+  }
+
+  .bn-label {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 54px;
+    text-align: center;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  /* Active blue dot indicator above icon */
+  .bn-dot {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 2.5px;
+    background: #1565ff;
+    border-radius: 2px;
+  }
+
+  /* Active tab icon gets a subtle glow bg pill */
+  .bn-tab.bn-active .bn-icon {
+    background: rgba(21, 101, 255, 0.12);
+    border-radius: 10px;
+    padding: 4px 8px;
+    width: auto;
+    height: 32px;
+  }
+
+  /* Push main content above bottom nav */
+  .app-main {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Hide the old hamburger toggle — bottom nav replaces it */
+  .sidebar-mobile-toggle { display: none !important; }
+}
