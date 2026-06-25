@@ -75,20 +75,27 @@ exports.login = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password_hash);
     if (!match) return res.status(401).json({ message: 'Invalid email or password.' });
 
-    // Block unverified users — send a fresh code
+    // Block unverified users — send a fresh code only when needed.
     if (!user.is_verified) {
-      const code = generateCode();
-      const expires = expiresAt();
-      await db.execute(
-        'UPDATE users SET verification_code = ?, code_expires_at = ? WHERE id = ?',
-        [code, expires, user.id]
-      );
-      resend.emails.send({
-        from: 'CopyTradePrime <onboarding@resend.dev>',
-        to: [email],
-        subject: `Your Verification Code: ${code}`,
-        html: buildVerificationEmail(code, user.full_name),
-      }).catch((e) => console.error('Verification email failed:', e.message));
+      const now = new Date();
+      let { verification_code: code, code_expires_at: expiresAtRaw } = user;
+      const expiresAtDate = expiresAtRaw ? new Date(expiresAtRaw) : null;
+      const needsNewCode = !code || !expiresAtDate || expiresAtDate <= now;
+
+      if (needsNewCode) {
+        code = generateCode();
+        const expires = expiresAt();
+        await db.execute(
+          'UPDATE users SET verification_code = ?, code_expires_at = ? WHERE id = ?',
+          [code, expires, user.id]
+        );
+        resend.emails.send({
+          from: 'CopyTradePrime <onboarding@resend.dev>',
+          to: [email],
+          subject: `Your Verification Code: ${code}`,
+          html: buildVerificationEmail(code, user.full_name),
+        }).catch((e) => console.error('Verification email failed:', e.message));
+      }
 
       return res.status(403).json({
         message: 'Please verify your email before signing in.',

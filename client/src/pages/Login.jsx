@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../services/authService';
+import DashLoader from '../components/common/DashLoader';
 import './AuthPages.css';
 
 export default function Login() {
   const [form, setForm]       = useState({ email: '', password: '' });
   const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   const { login }  = useAuth();
   const navigate   = useNavigate();
 
@@ -20,23 +22,23 @@ export default function Login() {
     try {
       const { data } = await authService.login(form);
 
-      // Unverified user — redirect to verification page
       if (data.needsVerification) {
         navigate('/verify', {
-          state: {
-            email:     data.email,
-            full_name: data.full_name,
-            // no token yet — they must verify before getting one
-          },
+          state: { email: data.email, full_name: data.full_name },
         });
         return;
       }
 
+      // Show branded loading screen before redirecting
+      setShowLoader(true);
       login({ full_name: data.full_name, email: form.email, role: data.role }, data.token);
-      navigate(data.requiresTraderActivation ? '/activate-trader' : '/dashboard');
+
+      setTimeout(() => {
+        navigate(data.requiresTraderActivation ? '/activate-trader' : '/dashboard');
+      }, 1800);
+
     } catch (err) {
       const d = err.response?.data;
-      // Server returned 403 with needsVerification
       if (d?.needsVerification) {
         navigate('/verify', {
           state: { email: d.email, full_name: d.full_name },
@@ -44,14 +46,17 @@ export default function Login() {
         return;
       }
       setError(d?.message || 'Invalid email or password.');
-    } finally {
       setLoading(false);
     }
   };
 
+  // Show full-screen dashboard loader while transitioning
+  if (showLoader) {
+    return <DashLoader message="Signing you in…" />;
+  }
+
   return (
     <div className="auth-page">
-      {/* Left decorative panel */}
       <div className="auth-left">
         <div className="auth-left-bg" />
         <div className="auth-left-orb" />
@@ -88,7 +93,6 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right form panel */}
       <div className="auth-right">
         <div className="auth-form-wrap">
           <Link to="/" className="auth-mobile-back">
@@ -108,25 +112,13 @@ export default function Login() {
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Email Address</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
+              <input type="email" name="email" placeholder="you@example.com"
+                value={form.email} onChange={handleChange} required />
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                value={form.password}
-                onChange={handleChange}
-                required
-              />
+              <input type="password" name="password" placeholder="Enter your password"
+                value={form.password} onChange={handleChange} required />
             </div>
             <button type="submit" className="btn-primary auth-submit" disabled={loading}>
               {loading

@@ -23,17 +23,17 @@ export default function VerificationPage() {
   const inputRefs = useRef([]);
   const sentRef = useRef(false); // StrictMode guard
 
-  /* ── Auto-send code on mount (only once) ── */
+  /* ── Verify required state and start countdown ── */
   useEffect(() => {
-    if (!email) { navigate('/login'); return; }
+    if (!email) {
+      navigate('/login');
+      return;
+    }
     if (sentRef.current) return;
     sentRef.current = true;
 
-    // Only send if coming from register (token present) — login already sends one
-    if (token) {
-      api.post('/auth/send-verification', { email }).catch(() => { });
-    }
-
+    // The server already sends a verification email during registration or login,
+    // so we do not auto-send another one here on page mount.
     startCountdown();
   }, []);
 
