@@ -63,6 +63,10 @@ const ADMIN_NAV = [
     to: '/admin/wallets', label: 'Wallets',
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" /><circle cx="16" cy="14" r="2" /></svg>
   },
+  {
+    to: '/admin/tickets', label: 'Tickets',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" /><path d="M9 9h6" /><path d="M9 13h4" /></svg>
+  },
 ];
 
 export default function Sidebar() {

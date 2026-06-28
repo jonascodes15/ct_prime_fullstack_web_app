@@ -53,6 +53,14 @@ const NotificationsIcon = () => (
   </svg>
 );
 
+const HelpdeskIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" />
+    <path d="M9 9h6" />
+    <path d="M9 13h4" />
+  </svg>
+);
+
 const LogoutIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -66,6 +74,7 @@ const MENU_ITEMS = [
   { label: 'KYC Verification', to: '/account/kyc', Icon: KYCIcon },
   { label: 'Notifications', to: '/account/notifications', Icon: NotificationsIcon },
   { label: 'Referral Program', to: '/account/referral', Icon: ReferralIcon },
+  { label: 'Helpdesk', to: '/account/helpdesk', Icon: HelpdeskIcon },
 ];
 
 export default function AccountMenu() {
@@ -113,6 +122,12 @@ export default function AccountMenu() {
       return {
         ...item,
         desc: 'See admin alerts and updates',
+      };
+    }
+    if (item.to === '/account/helpdesk') {
+      return {
+        ...item,
+        desc: 'Create tickets and read FAQs',
       };
     }
     return item;

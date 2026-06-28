@@ -36,7 +36,6 @@ function IndustryPricing() {
           <span>✓ No hidden fees</span>
           <span>✓ No deposit fees</span>
           <span>✓ No withdrawal fees</span>
-          <span>✓ Free demo account</span>
         </div>
       </div>
     </section>
@@ -93,7 +92,7 @@ const SWITCH_FEATURES = [
     ),
   },
   {
-    title: '495,000+ customers',
+    title: '200,000+ users',
     desc: 'With years of activity in the financial markets, Copy Trade Prime has gained thousands of customers.',
     svg: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#333" strokeWidth="1.8">
@@ -285,7 +284,7 @@ const RATINGS = [
 
 const REVIEWS = [
   { name: 'Vivian T. Vachon', text: "Copy Trade Prime runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail." },
-  { name: 'Jack Thompson', text: "I was an engineer in Washington DC when an account manager brought this opportunity to me. I just said casually to invest with £500 but my story today is on a premium plan." },
+  { name: 'Jack Thompson', text: "I was an engineer in Washington DC when an account manager brought this opportunity to me. I just said casually to invest with £2000 but my story today is on a premium plan." },
   { name: 'Robert Prickett', text: "I have only been a member for a few months and I have already earned a decent amount of money. Finally a real and honest company that does what it says. Thank you so much for this great opportunity!" },
 ];
 
@@ -430,7 +429,7 @@ function TradeConfidence() {
         <div className="open-account-bar">
           <div className="oab-label">OPEN YOUR ACCOUNT</div>
           <div className="oab-inner">
-            <p>Connect with over 450,000 investors in the world's leading FX Broker.</p>
+            <p>Connect with over 200,000 users in the world's leading FX Broker.</p>
             <Link to="/register" className="btn-primary oab-btn">Open Account</Link>
           </div>
         </div>

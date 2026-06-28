@@ -59,6 +59,7 @@ export default function AdminOverview() {
                   { label: 'Pending Withdrawals', to: '/admin/withdrawals', },
                   { label: 'Manage Traders', to: '/admin/traders', },
                   { label: 'Manage Wallets', to: '/admin/wallets', },
+                  { label: 'View Tickets', to: '/admin/tickets', },
                 ].map((l) => (
                   <Link key={l.label} to={l.to} className="aql-card">
                     <span className="aql-icon">{l.icon}</span>

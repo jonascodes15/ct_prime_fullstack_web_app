@@ -1,7 +1,7 @@
 .dash-header {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   margin-bottom: 32px;
   flex-wrap: wrap;
@@ -21,6 +21,7 @@
 .dash-header-actions {
   display: flex;
   gap: 10px;
+  flex-basis: 100%;
 }
 
 .dash-notifications-link {

@@ -51,7 +51,7 @@ export default function HeroSection() {
           {/* Stats row */}
           <div className="hero-stats animate-up" style={{ animationDelay: '0.4s' }}>
             {[
-              { val: '400K+', label: 'Active Clients' },
+              { val: '200K+', label: 'Active Clients' },
               { val: '2,100+', label: 'Markets' },
               { val: '150+', label: 'Countries' },
               { val: '12+', label: 'Years Experience' },
