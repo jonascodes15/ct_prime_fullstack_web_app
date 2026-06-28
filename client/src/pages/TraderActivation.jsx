@@ -17,12 +17,12 @@ function CandleChart({ seed = 0 }) {
   let price = 60 + rand() * 40;
 
   for (let i = 0; i < 18; i++) {
-    const x       = 10 + i * 16;
-    const change  = (rand() - 0.46) * 18;
-    const open    = price;
-    const close   = Math.max(10, Math.min(H - 10, price + change));
-    const high    = Math.min(open, close) - rand() * 8;
-    const low     = Math.max(open, close) + rand() * 8;
+    const x = 10 + i * 16;
+    const change = (rand() - 0.46) * 18;
+    const open = price;
+    const close = Math.max(10, Math.min(H - 10, price + change));
+    const high = Math.min(open, close) - rand() * 8;
+    const low = Math.max(open, close) + rand() * 8;
     const bullish = close < open; // SVG y inverted
 
     candles.push({ x, open, close, high, low, bullish });
@@ -36,12 +36,12 @@ function CandleChart({ seed = 0 }) {
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice"
       xmlns="http://www.w3.org/2000/svg">
       {/* Background */}
-      <rect width={W} height={H} fill="#050d1a"/>
+      <rect width={W} height={H} fill="#050d1a" />
 
       {/* Subtle grid lines */}
-      {[40,80,120,160].map(y => (
+      {[40, 80, 120, 160].map(y => (
         <line key={y} x1="0" y1={y} x2={W} y2={y}
-          stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+          stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
       ))}
 
       {/* Candles */}
@@ -50,7 +50,7 @@ function CandleChart({ seed = 0 }) {
           {/* Wick */}
           <line x1={c.x} y1={c.high} x2={c.x} y2={c.low}
             stroke={c.bullish ? '#00e676' : '#ff3d57'}
-            strokeWidth="1" opacity="0.7"/>
+            strokeWidth="1" opacity="0.7" />
           {/* Body */}
           <rect
             x={c.x - 4}
@@ -66,7 +66,7 @@ function CandleChart({ seed = 0 }) {
 
       {/* Price line */}
       <path d={linePath} fill="none"
-        stroke="rgba(21,101,255,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
+        stroke="rgba(21,101,255,0.6)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -95,7 +95,7 @@ function TraderCard({ trader, selected, onSelect }) {
           <>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-              <path d="M20 6L9 17l-5-5"/>
+              <path d="M20 6L9 17l-5-5" />
             </svg>
             Selected
           </>
@@ -127,10 +127,7 @@ function TraderCard({ trader, selected, onSelect }) {
             <span className="ts-label">Monthly ROI</span>
             <span className="ts-val green">+{trader.monthly_return}%</span>
           </div>
-          <div className="tc-stat">
-            <span className="ts-label">Followers</span>
-            <span className="ts-val">{Number(trader.total_followers).toLocaleString()}</span>
-          </div>
+
         </div>
       </div>
     </div>
@@ -139,11 +136,11 @@ function TraderCard({ trader, selected, onSelect }) {
 
 /* ── Main page ── */
 export default function TraderActivation() {
-  const [traders,    setTraders]    = useState([]);
-  const [selected,   setSelected]   = useState(null);
-  const [loading,    setLoading]    = useState(true);
+  const [traders, setTraders] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [activating, setActivating] = useState(false);
-  const [error,      setError]      = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -177,7 +174,7 @@ export default function TraderActivation() {
           <div className="activation-logo">
             <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
               <path d="M8 32L16 8L24 20L32 8" stroke="#1565ff"
-                strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+                strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             CopyTrade<em>Prime</em>
           </div>
@@ -190,7 +187,7 @@ export default function TraderActivation() {
 
         {/* Loading */}
         {loading && (
-          <div style={{ display:'flex', justifyContent:'center', padding:'60px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '60px 0' }}>
             <LoadingSpinner size={40} />
           </div>
         )}
@@ -216,7 +213,7 @@ export default function TraderActivation() {
                 onClick={handleActivate}
               >
                 {activating
-                  ? <><span className="spinner-ring" style={{ width:18, height:18 }} /> Activating…</>
+                  ? <><span className="spinner-ring" style={{ width: 18, height: 18 }} /> Activating…</>
                   : 'Activate Selected Trader'
                 }
               </button>

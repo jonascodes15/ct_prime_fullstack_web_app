@@ -14,8 +14,8 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(21,101,255,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0,207,255,0.05) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(21, 101, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 207, 255, 0.05) 0%, transparent 60%);
 }
 
 .activation-inner {
@@ -44,7 +44,11 @@
   justify-content: center;
   gap: 8px;
 }
-.activation-logo em { color: var(--blue); font-style: normal; }
+
+.activation-logo em {
+  color: var(--blue);
+  font-style: normal;
+}
 
 .activation-header h1 {
   font-size: clamp(1.5rem, 3vw, 2.1rem);
@@ -52,6 +56,7 @@
   margin-bottom: 10px;
   color: var(--off-white);
 }
+
 .activation-header p {
   color: var(--grey);
   font-size: 0.92rem;
@@ -82,13 +87,13 @@
 
 .trader-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .trader-card.selected {
   border-color: var(--blue);
-  box-shadow: 0 0 0 1px var(--blue), 0 16px 40px rgba(21,101,255,0.3);
+  box-shadow: 0 0 0 1px var(--blue), 0 16px 40px rgba(21, 101, 255, 0.3);
 }
 
 /* Chart background — candlestick SVG pattern */
@@ -109,13 +114,11 @@
 .tc-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(8,14,28,0.55) 0%,
-    rgba(8,14,28,0.25) 40%,
-    rgba(8,14,28,0.80) 70%,
-    rgba(8,14,28,0.97) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(8, 14, 28, 0.55) 0%,
+      rgba(8, 14, 28, 0.25) 40%,
+      rgba(8, 14, 28, 0.80) 70%,
+      rgba(8, 14, 28, 0.97) 100%);
   z-index: 1;
 }
 
@@ -129,10 +132,10 @@
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: rgba(10,15,30,0.82);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(10, 15, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.75rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
@@ -140,17 +143,22 @@
   font-family: inherit;
   cursor: pointer;
 }
+
 .tc-activate-btn:hover {
   background: var(--blue);
   border-color: var(--blue);
   color: #fff;
 }
+
 .tc-activate-btn.is-selected {
   background: var(--blue);
   border-color: var(--blue);
   color: #fff;
 }
-.tc-activate-btn svg { flex-shrink: 0; }
+
+.tc-activate-btn svg {
+  flex-shrink: 0;
+}
 
 /* Avatar — centred in card */
 .tc-avatar-wrap {
@@ -174,8 +182,8 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  border: 2.5px solid rgba(255,255,255,0.2);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  border: 2.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .tc-avatar-placeholder {
@@ -198,8 +206,14 @@
   border-radius: 50%;
   border: 2px solid var(--navy-card);
 }
-.tc-status.online  { background: var(--green); }
-.tc-status.offline { background: var(--grey-dark); }
+
+.tc-status.online {
+  background: var(--green);
+}
+
+.tc-status.offline {
+  background: var(--grey-dark);
+}
 
 /* Bottom info */
 .tc-info-bottom {
@@ -224,7 +238,7 @@
 
 .tc-strategy {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.45);
   margin-bottom: 10px;
   white-space: nowrap;
   overflow: hidden;
@@ -236,15 +250,19 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 10px;
 }
 
-.tc-stat { display: flex; flex-direction: column; gap: 2px; }
+.tc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
 .ts-label {
   font-size: 0.58rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -255,7 +273,10 @@
   font-weight: 700;
   color: #fff;
 }
-.ts-val.green { color: var(--green); }
+
+.ts-val.green {
+  color: var(--green);
+}
 
 /* ── Footer button ── */
 .activation-footer {
@@ -269,6 +290,7 @@
   font-size: 0.95rem;
   font-weight: 700;
 }
+
 .activation-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
@@ -278,8 +300,8 @@
 
 /* ── Error ── */
 .activation-error {
-  background: rgba(255,61,87,0.1);
-  border: 1px solid rgba(255,61,87,0.3);
+  background: rgba(255, 61, 87, 0.1);
+  border: 1px solid rgba(255, 61, 87, 0.3);
   color: var(--red);
   border-radius: var(--radius-sm);
   padding: 12px 18px;
@@ -293,13 +315,26 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .traders-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 10px;
   }
-  .tc-avatar { width: 60px; height: 60px; }
-  .tc-avatar img, .tc-avatar-placeholder { width: 60px; height: 60px; }
+
+  .tc-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .tc-avatar img,
+  .tc-avatar-placeholder {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 @media (max-width: 400px) {
-  .traders-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .traders-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }

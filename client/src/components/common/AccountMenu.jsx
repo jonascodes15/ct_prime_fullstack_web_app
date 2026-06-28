@@ -121,13 +121,13 @@ export default function AccountMenu() {
     if (item.to === '/account/notifications') {
       return {
         ...item,
-        desc: 'See admin alerts and updates',
+        desc: 'Manage your notification preferences'
       };
     }
     if (item.to === '/account/helpdesk') {
       return {
         ...item,
-        desc: 'Create tickets and read FAQs',
+        desc: 'Get support and assistance'
       };
     }
     return item;
