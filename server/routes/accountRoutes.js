@@ -14,6 +14,15 @@ const upload = multer({
   },
 });
 
+const ticketUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 100 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'image/jpg'];
+    allowed.includes(file.mimetype) ? cb(null, true) : cb(new Error('Only JPG or PNG screenshots below 100KB are allowed.'));
+  },
+});
+
 router.get('/profile', protect, ctrl.getProfile);
 router.patch('/profile', protect, ctrl.updateProfile);
 router.patch('/password', protect, ctrl.changePassword);
@@ -22,5 +31,7 @@ router.post('/kyc', protect, upload.single('id_document'), ctrl.submitKYC);
 router.get('/notifications', protect, ctrl.getNotifications);
 router.patch('/notifications/:id/read', protect, ctrl.markNotificationRead);
 router.get('/referral', protect, ctrl.getReferral);
+router.get('/tickets', protect, ctrl.getTickets);
+router.post('/tickets', protect, ticketUpload.single('screenshot'), ctrl.createTicket);
 
 module.exports = router;

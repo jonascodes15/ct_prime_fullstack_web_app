@@ -19,6 +19,9 @@ router.patch('/kyc-submissions/:id', admin, ctrl.updateKYCSubmission);
 // Notifications
 router.post('/notifications/broadcast', admin, ctrl.broadcastNotification);
 
+// Support tickets
+router.get('/tickets', admin, ctrl.getSupportTickets);
+
 // Earnings
 router.post('/earnings', admin, ctrl.addEarning);
 

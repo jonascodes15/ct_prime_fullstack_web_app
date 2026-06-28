@@ -210,3 +210,46 @@ exports.getReferral = async (req, res, next) => {
     });
   } catch (err) { next(err); }
 };
+
+// GET /api/account/tickets
+exports.getTickets = async (req, res, next) => {
+  try {
+    const [tickets] = await db.execute(
+      `SELECT id, subject, complaint, screenshot_name, screenshot_mime, status, created_at
+       FROM support_tickets
+       WHERE user_id = ?
+       ORDER BY created_at DESC
+       LIMIT 20`,
+      [req.user.id]
+    );
+    res.json(tickets);
+  } catch (err) { next(err); }
+};
+
+// POST /api/account/tickets
+exports.createTicket = async (req, res, next) => {
+  try {
+    const { subject, complaint } = req.body;
+    if (!subject || !complaint) {
+      return res.status(400).json({ message: 'Subject and complaint are required.' });
+    }
+
+    let screenshotData = null;
+    let screenshotName = null;
+    let screenshotMime = null;
+    if (req.file) {
+      screenshotData = req.file.buffer.toString('base64');
+      screenshotName = req.file.originalname;
+      screenshotMime = req.file.mimetype;
+    }
+
+    await db.execute(
+      `INSERT INTO support_tickets
+       (user_id, subject, complaint, screenshot_data, screenshot_name, screenshot_mime)
+       VALUES (?,?,?,?,?,?)`,
+      [req.user.id, subject, complaint, screenshotData, screenshotName, screenshotMime]
+    );
+
+    res.status(201).json({ message: 'Ticket submitted successfully.' });
+  } catch (err) { next(err); }
+};

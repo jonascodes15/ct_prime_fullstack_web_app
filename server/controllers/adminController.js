@@ -382,3 +382,18 @@ exports.getStats = async (req, res, next) => {
     res.json({ total_users, total_deposited, pending_deposits, pending_withdrawals, total_balance });
   } catch (err) { next(err); }
 };
+
+// GET /api/admin/tickets
+exports.getSupportTickets = async (req, res, next) => {
+  try {
+    const [tickets] = await db.execute(
+      `SELECT st.id, st.user_id, st.subject, st.complaint, st.screenshot_data,
+              st.screenshot_name, st.screenshot_mime, st.status, st.created_at,
+              u.full_name, u.email
+       FROM support_tickets st
+       JOIN users u ON u.id = st.user_id
+       ORDER BY st.created_at DESC`
+    );
+    res.json(tickets);
+  } catch (err) { next(err); }
+};
