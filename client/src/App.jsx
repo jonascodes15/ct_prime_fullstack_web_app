@@ -19,10 +19,12 @@ import ReferralPage from './pages/account/ReferralPage';
 
 import AdminOverview from './pages/admin/AdminOverview';
 import AdminMembers from './pages/admin/AdminMembers';
+import AdminKYC from './pages/admin/AdminKYC';
 import AdminDeposits from './pages/admin/AdminDeposits';
 import AdminWithdrawals from './pages/admin/AdminWithdrawals';
 import AdminTraders from './pages/admin/AdminTraders';
 import AdminWallets from './pages/admin/AdminWallets';
+import NotificationsPage from './pages/account/Notifications';
 import VerificationPage from './pages/VerificationPage';
 import './index.css';
 
@@ -73,11 +75,13 @@ export default function App() {
           <Route path="/live-markets" element={<ClientRoute><LiveMarkets /></ClientRoute>} />
           <Route path="/account/settings" element={<ClientRoute><AccountSettings /></ClientRoute>} />
           <Route path="/account/kyc" element={<ClientRoute><KYCPage /></ClientRoute>} />
+          <Route path="/account/notifications" element={<ClientRoute><NotificationsPage /></ClientRoute>} />
           <Route path="/account/referral" element={<ClientRoute><ReferralPage /></ClientRoute>} />
 
           {/* Admin only */}
           <Route path="/admin" element={<AdminRoute><AdminOverview /></AdminRoute>} />
           <Route path="/admin/users" element={<AdminRoute><AdminMembers /></AdminRoute>} />
+          <Route path="/admin/kyc" element={<AdminRoute><AdminKYC /></AdminRoute>} />
           <Route path="/admin/deposits" element={<AdminRoute><AdminDeposits /></AdminRoute>} />
           <Route path="/admin/withdrawals" element={<AdminRoute><AdminWithdrawals /></AdminRoute>} />
           <Route path="/admin/traders" element={<AdminRoute><AdminTraders /></AdminRoute>} />

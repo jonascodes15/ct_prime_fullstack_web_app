@@ -60,6 +60,74 @@ exports.toggleUserStatus = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// GET /api/admin/kyc-submissions
+exports.getKYCSubmissions = async (req, res, next) => {
+  try {
+    const [rows] = await db.execute(
+      `SELECT ks.id, ks.user_id, ks.status, ks.document_name, ks.admin_note,
+              ks.submitted_at, ks.reviewed_at, u.full_name, u.email
+       FROM kyc_submissions ks
+       JOIN users u ON u.id = ks.user_id
+       ORDER BY FIELD(ks.status,'pending','approved','rejected'), ks.submitted_at DESC`
+    );
+    res.json(rows);
+  } catch (err) { next(err); }
+};
+
+// PATCH /api/admin/kyc-submissions/:id
+exports.updateKYCSubmission = async (req, res, next) => {
+  try {
+    const { status, admin_note } = req.body;
+    const submissionId = req.params.id;
+    if (!['approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: 'Status must be approved or rejected.' });
+    }
+
+    const [[submission]] = await db.execute(
+      'SELECT * FROM kyc_submissions WHERE id = ?', [submissionId]
+    );
+    if (!submission) return res.status(404).json({ message: 'KYC submission not found.' });
+
+    if (submission.status === status) {
+      return res.json({ message: `KYC is already ${status}.` });
+    }
+
+    const reviewedAt = new Date();
+    await db.execute(
+      'UPDATE kyc_submissions SET status = ?, admin_note = ?, reviewed_at = ? WHERE id = ?',
+      [status, admin_note || null, reviewedAt, submissionId]
+    );
+
+    const subject = status === 'approved' ? 'KYC Verified' : 'KYC Submission Rejected';
+    const body = status === 'approved'
+      ? 'Your KYC has been verified successfully. You can now access full account privileges.'
+      : `Your KYC submission was rejected. ${admin_note || 'Please update your documents and resubmit.'}`;
+
+    await db.execute(
+      'INSERT INTO notifications (user_id, subject, body) VALUES (?, ?, ?)',
+      [submission.user_id, subject, body]
+    );
+
+    res.json({ message: `KYC ${status}.` });
+  } catch (err) { next(err); }
+};
+
+// POST /api/admin/notifications/broadcast
+exports.broadcastNotification = async (req, res, next) => {
+  try {
+    const { subject, body } = req.body;
+    if (!subject || !body) return res.status(400).json({ message: 'Subject and body are required.' });
+
+    const [users] = await db.execute('SELECT id FROM users WHERE role = ?', ['client']);
+    if (!users.length) return res.status(400).json({ message: 'No client users found.' });
+
+    const values = users.map((user) => [user.id, subject, body]);
+    await db.query('INSERT INTO notifications (user_id, subject, body) VALUES ?', [values]);
+
+    res.status(201).json({ message: 'Broadcast message sent to all users.' });
+  } catch (err) { next(err); }
+};
+
 // ── EARNINGS ──────────────────────────────────────
 
 // POST /api/admin/earnings

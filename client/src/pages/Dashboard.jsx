@@ -9,9 +9,9 @@ import AccountMenu from '../components/common/AccountMenu';
 import './Dashboard.css';
 
 export default function Dashboard() {
-  const [data, setData]       = useState(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     dashboardService.getData()
@@ -32,10 +32,20 @@ export default function Dashboard() {
             <h1>Dashboard</h1>
             <p>Welcome back — here's your portfolio overview.</p>
           </div>
+          {data && (
+            <div className="dash-header-actions">
+              <Link to="/account/notifications" className="dash-notifications-link">
+                <span>Notifications</span>
+                {data.unread_notifications > 0 && (
+                  <span className="notification-pill">{data.unread_notifications}</span>
+                )}
+              </Link>
+            </div>
+          )}
         </div>
 
         {loading && <div className="dash-loading"><LoadingSpinner size={36} /></div>}
-        {error   && <div className="dash-error">{error}</div>}
+        {error && <div className="dash-error">{error}</div>}
 
         {data && (
           <>
@@ -59,7 +69,7 @@ export default function Dashboard() {
               <div className="balance-card">
                 <div className="bc-label">Total Deposited</div>
                 <div className="bc-value">{formatCurrency(data.balance?.total_deposited)}</div>
-                <div className="bc-sub"><span style={{ color:'var(--grey-dark)', fontSize:'0.82rem' }}>Cumulative</span></div>
+                <div className="bc-sub"><span style={{ color: 'var(--grey-dark)', fontSize: '0.82rem' }}>Cumulative</span></div>
               </div>
 
               <div className="balance-card">
@@ -73,7 +83,7 @@ export default function Dashboard() {
                   </>
                 ) : (
                   <>
-                    <div className="bc-value" style={{ fontSize:'1rem', color:'var(--grey)' }}>No trader</div>
+                    <div className="bc-value" style={{ fontSize: '1rem', color: 'var(--grey)' }}>No trader</div>
                     <Link to="/activate-trader" className="bc-action">Activate →</Link>
                   </>
                 )}

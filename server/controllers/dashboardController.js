@@ -19,6 +19,11 @@ exports.getDashboard = async (req, res, next) => {
       [uid]
     );
 
+    const [[notificationCount]] = await db.execute(
+      'SELECT COUNT(*) AS unread_notifications FROM notifications WHERE user_id = ? AND is_read = 0',
+      [uid]
+    );
+
     const [[trader]] = await db.execute(
       `SELECT t.id, t.name, t.strategy, t.win_rate, t.monthly_return, t.total_followers, t.avatar_url
        FROM traders t
@@ -28,7 +33,7 @@ exports.getDashboard = async (req, res, next) => {
       [uid]
     );
 
-    res.json({ balance: balance || {}, trades, earnings, trader: trader || null });
+    res.json({ balance: balance || {}, trades, earnings, trader: trader || null, unread_notifications: notificationCount?.unread_notifications || 0 });
   } catch (err) {
     next(err);
   }

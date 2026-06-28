@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
-const db     = require('../config/db');
+const db = require('../config/db');
 const crypto = require('crypto');
 
 /* ── helpers ── */
 const generateReferralCode = (userId) =>
-  'CPT' + userId.toString(36).toUpperCase().padStart(4,'0') +
+  'CPT' + userId.toString(36).toUpperCase().padStart(4, '0') +
   crypto.randomBytes(3).toString('hex').toUpperCase();
 
 /* ────────────────────────────────────
@@ -84,6 +84,38 @@ exports.getKYC = async (req, res, next) => {
       [req.user.id]
     );
     res.json(kyc || null);
+  } catch (err) { next(err); }
+};
+
+/* ──────────────────────────────────────────────────
+   GET /api/account/notifications
+──────────────────────────────────── */
+exports.getNotifications = async (req, res, next) => {
+  try {
+    const [notifications] = await db.execute(
+      `SELECT id, subject, body, is_read, created_at
+       FROM notifications
+       WHERE user_id = ?
+       ORDER BY created_at DESC
+       LIMIT 50`,
+      [req.user.id]
+    );
+    res.json(notifications);
+  } catch (err) { next(err); }
+};
+
+/* ──────────────────────────────────────────────────
+   PATCH /api/account/notifications/:id/read
+──────────────────────────────────── */
+exports.markNotificationRead = async (req, res, next) => {
+  try {
+    const [result] = await db.execute(
+      'UPDATE notifications SET is_read = 1 WHERE id = ? AND user_id = ?',
+      [req.params.id, req.user.id]
+    );
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: 'Notification not found.' });
+    res.json({ message: 'Notification marked as read.' });
   } catch (err) { next(err); }
 };
 
@@ -171,10 +203,10 @@ exports.getReferral = async (req, res, next) => {
     );
 
     res.json({
-      referral_code:    ref.referral_code,
-      total_referrals:  stats?.total_referrals  || 0,
+      referral_code: ref.referral_code,
+      total_referrals: stats?.total_referrals || 0,
       active_referrals: stats?.active_referrals || 0,
-      total_earned:     parseFloat(stats?.total_earned || 0).toFixed(2),
+      total_earned: parseFloat(stats?.total_earned || 0).toFixed(2),
     });
   } catch (err) { next(err); }
 };
