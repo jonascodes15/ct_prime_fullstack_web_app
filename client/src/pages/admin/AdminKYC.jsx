@@ -23,6 +23,8 @@ export default function AdminKYC() {
     const [filter, setFilter] = useState('pending');
     const [actionLoading, setActionLoading] = useState(null);
     const [notes, setNotes] = useState({});
+    const [users, setUsers] = useState([]);
+    const [selectedUserId, setSelectedUserId] = useState('all');
     const [broadcastSubject, setBroadcastSubject] = useState('');
     const [broadcastBody, setBroadcastBody] = useState('');
     const [broadcastLoading, setBroadcastLoading] = useState(false);
@@ -33,6 +35,12 @@ export default function AdminKYC() {
             .then(({ data }) => setSubmissions(data || []))
             .catch(() => setError('Failed to load KYC submissions.'))
             .finally(() => setLoading(false));
+    }, []);
+
+    useEffect(() => {
+        api.get('/admin/users')
+            .then(({ data }) => setUsers((data || []).filter((item) => item.role === 'client')))
+            .catch(() => setUsers([]));
     }, []);
 
     const handleStatusUpdate = async (submissionId, status) => {
@@ -60,10 +68,12 @@ export default function AdminKYC() {
             await api.post('/admin/notifications/broadcast', {
                 subject: broadcastSubject,
                 body: broadcastBody,
+                user_id: selectedUserId === 'all' ? undefined : selectedUserId,
             });
-            setBroadcastMessage('Broadcast sent successfully.');
+            setBroadcastMessage(selectedUserId === 'all' ? 'Broadcast sent successfully.' : 'Message sent to selected user.');
             setBroadcastSubject('');
             setBroadcastBody('');
+            setSelectedUserId('all');
         } catch (err) {
             setBroadcastMessage(err.response?.data?.message || 'Failed to send broadcast.');
         } finally {
@@ -94,11 +104,26 @@ export default function AdminKYC() {
                     <div className="broadcast-card-header">
                         <div>
                             <h2>Broadcast Message</h2>
-                            <p>Send an announcement or promotion to all client users.</p>
+                            <p>Send an announcement, promotion, or account message to clients.</p>
                         </div>
                     </div>
                     {broadcastMessage && <div className="admin-alert success">{broadcastMessage}</div>}
                     <div className="broadcast-form-grid">
+                        <label>
+                            Recipient
+                            <select
+                                className="broadcast-field"
+                                value={selectedUserId}
+                                onChange={(e) => setSelectedUserId(e.target.value)}
+                            >
+                                <option value="all">All users</option>
+                                {users.map((client) => (
+                                    <option key={client.id} value={client.id}>
+                                        {client.full_name} - {client.email}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
                         <label>
                             Subject
                             <input
@@ -116,7 +141,7 @@ export default function AdminKYC() {
                                 rows="4"
                                 value={broadcastBody}
                                 onChange={(e) => setBroadcastBody(e.target.value)}
-                                placeholder="Enter the message for all users"
+                                placeholder={selectedUserId === 'all' ? 'Enter the message for all users' : 'Enter the message for this user'}
                             />
                         </label>
                         <div className="broadcast-actions">
@@ -126,7 +151,7 @@ export default function AdminKYC() {
                                 onClick={handleBroadcast}
                                 disabled={broadcastLoading}
                             >
-                                {broadcastLoading ? 'Sending…' : 'Send Broadcast'}
+                                {broadcastLoading ? 'Sending...' : selectedUserId === 'all' ? 'Send Broadcast' : 'Send Message'}
                             </button>
                         </div>
                     </div>

@@ -115,8 +115,23 @@ exports.updateKYCSubmission = async (req, res, next) => {
 // POST /api/admin/notifications/broadcast
 exports.broadcastNotification = async (req, res, next) => {
   try {
-    const { subject, body } = req.body;
+    const { subject, body, user_id } = req.body;
     if (!subject || !body) return res.status(400).json({ message: 'Subject and body are required.' });
+
+    if (user_id) {
+      const [[user]] = await db.execute(
+        'SELECT id FROM users WHERE id = ? AND role = ?',
+        [user_id, 'client']
+      );
+      if (!user) return res.status(404).json({ message: 'Selected client user was not found.' });
+
+      await db.execute(
+        'INSERT INTO notifications (user_id, subject, body) VALUES (?, ?, ?)',
+        [user.id, subject, body]
+      );
+
+      return res.status(201).json({ message: 'Message sent to selected user.' });
+    }
 
     const [users] = await db.execute('SELECT id FROM users WHERE role = ?', ['client']);
     if (!users.length) return res.status(400).json({ message: 'No client users found.' });

@@ -46,7 +46,7 @@ export default function NotificationsPage() {
                 <div className="acct-page-header">
                     <div>
                         <h1>Notifications</h1>
-                        <p>Messages from administrators about account updates, promotions, and KYC status.</p>
+
                     </div>
                     <div className="notifications-header-meta">
                         <span>{unreadCount} unread</span>
@@ -63,7 +63,6 @@ export default function NotificationsPage() {
                 {!loading && !notifications.length && (
                     <div className="notification-empty">
                         <h3>No notifications yet</h3>
-                        <p>You will receive messages from the admin here when there are updates or promotions.</p>
                     </div>
                 )}
 

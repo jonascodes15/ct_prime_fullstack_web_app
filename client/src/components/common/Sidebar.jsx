@@ -87,6 +87,22 @@ export default function Sidebar() {
           {mobileOpen && (
             <div className="sidebar-backdrop" onClick={() => setMobileOpen(false)} />
           )}
+          <div className="admin-mobile-actions">
+            <button
+              type="button"
+              className="admin-mobile-action"
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              className="admin-mobile-action logout"
+              onClick={() => { logout(); navigate('/'); }}
+            >
+              Sign Out
+            </button>
+          </div>
         </>
       )}
 

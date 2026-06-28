@@ -166,3 +166,33 @@
     padding-top: 68px; /* space for toggle button */
   }
 }
+
+.admin-mobile-actions {
+  display: none;
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 400;
+  gap: 8px;
+}
+
+.admin-mobile-action {
+  min-height: 40px;
+  padding: 0 12px;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--off-white);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-mobile-action.logout {
+  color: var(--red);
+}
+
+@media (max-width: 900px) {
+  .admin-mobile-actions { display: flex; }
+}

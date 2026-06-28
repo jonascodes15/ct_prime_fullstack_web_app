@@ -54,6 +54,7 @@ export default function AdminOverview() {
               <div className="aql-grid">
                 {[
                   { label: 'View All Members', to: '/admin/users', },
+                  { label: 'KYC Submissions', to: '/admin/kyc', },
                   { label: 'Pending Deposits', to: '/admin/deposits', },
                   { label: 'Pending Withdrawals', to: '/admin/withdrawals', },
                   { label: 'Manage Traders', to: '/admin/traders', },
